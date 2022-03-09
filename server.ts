@@ -35,7 +35,14 @@ app.get("/", (req: Request, res: Response, next: NextFunction) => {
 });
 app.use("/api/v1", apiMethods, router);
 app.use((req: Request, res: Response, next: NextFunction) => {
-    next({ message: "Route Not Found" });
+    next({
+        message: "Route Not Found",
+        status: {
+            code: 404,
+            success: false
+        },
+        error: {}
+    });
 });
 
 app.use((error: any, req: Request, res: Response, next: NextFunction) => {
