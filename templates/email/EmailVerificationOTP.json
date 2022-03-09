@@ -1,0 +1,8 @@
+{
+    "Template": {
+      "TemplateName": "EmailVerificationOTP",
+      "SubjectPart": "Verify your email at Momento NFT",
+      "HtmlPart": "<h1>Hello,</h1><p>Your OTP verification code is {{otpcode}}.</p>",
+      "TextPart": "Hello,\r\nYour OTP verification code is {{otpcode}}."
+    }
+  }

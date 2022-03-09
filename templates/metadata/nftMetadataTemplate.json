@@ -1,0 +1,34 @@
+{
+    "name": "Momento NFT",
+    "symbol": "Momento X NFT",
+    "description": "Own the Moments that matter",
+    "seller_fee_basis_points": 0,
+    "image": "{{url_here}}",
+    "animation_url": "",
+    "external_url": "{{our_viewable_web_page_url_here}}",
+    "attributes": [
+      {
+        "trait_type": "web",
+        "value": "yes"
+      }
+    ],
+    "collection": {
+       "name": "Momento NFT",
+       "family": "Momento NFT" 
+    },
+    "properties": {
+      "files": [
+        {
+          "uri": "https://momento-uploads.s3.us-east-2.amazonaws.com/image-uploads/Momento.png",
+          "type": "image/jpg"
+        }
+      ],
+      "category": "image",
+      "creators": [
+        {
+          "address": "{{returned_public_key_here}}",
+          "share": 100
+        }
+      ]
+    }
+  }

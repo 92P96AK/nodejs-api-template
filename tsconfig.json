@@ -1,0 +1,34 @@
+{
+    "compilerOptions": {
+      "target": "es5",
+      "module": "commonjs",
+      "strict": true,
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "forceConsistentCasingInFileNames": true,
+      "noImplicitAny": false,
+      "sourceMap": true,
+      "removeComments": true,
+      "preserveConstEnums": true,
+      "declaration": true,
+      "lib": [
+        "es2015",
+        "dom"
+      ],
+      "noUnusedLocals": true,
+      "noImplicitReturns": true,
+      "noImplicitThis": true,
+      "noUnusedParameters": false,
+      "pretty": true,
+      "noFallthroughCasesInSwitch": true,
+      "allowUnreachableCode": false,
+      "outDir": "./dist",
+      "baseUrl": "./api"
+    },
+    "include": [
+      "api/**/*.ts"
+    ],
+    "exclude": [
+      "node_modules",
+    ]
+  }

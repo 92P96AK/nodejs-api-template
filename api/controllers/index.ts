@@ -1,0 +1,1 @@
+export { getOneuser } from "./user.controller"
