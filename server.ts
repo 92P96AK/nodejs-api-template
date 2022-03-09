@@ -2,7 +2,7 @@ import express, { Application, Request, Response, NextFunction } from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import router from "./api/routes";
-import { apiMethods } from "./api/middlewares/api-method"
+import { apiMethods } from "./api/middlewares/apiMethod"
 
 const app: Application = express();
 
@@ -39,7 +39,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 });
 
 app.use((error: any, req: Request, res: Response, next: NextFunction) => {
-    res.status(error?.status?.code || 500).json(error)
+    res.status(error?.status?.code || 404).json(error)
 });
 app.listen(9000, async () => {
     console.log(`Server is running at 9000`);

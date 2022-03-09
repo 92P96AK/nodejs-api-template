@@ -1,1 +1,1 @@
-export { getOneuser } from "./user.controller"
+export { getOneuser } from "./userController"
