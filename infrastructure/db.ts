@@ -22,7 +22,6 @@ export const dbCreateConnection = async (): Promise<Connection | null> => {
         const connectionManager = getConnectionManager();
         const connection = connectionManager.create(config);
         await connection.connect();
-        console.log("Database Connected ....")
     } catch (err: any) {
         if (err.name === 'AlreadyHasActiveConnectionError') {
             const activeConnection = getConnectionManager().get(config.name);

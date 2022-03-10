@@ -1,10 +1,18 @@
-import express, { Router } from "express";
-import { userController } from "../controllers";
+import { Router } from "express";
+import { UserController } from "../controllers";
+export class UserRoutes {
+    public userRouter: Router
+    public userController: UserController
 
-const userRouter: Router = express.Router();
+    constructor() {
+        this.userController = new UserController()
+        this.userRouter = Router({ mergeParams: true })
+        this.setRoutes()
+    }
 
-userRouter.get("/", userController.getOneuser);
-userRouter.post("/login", userController.loginUser);
-userRouter.post("/create", userController.createUser);
-
-export default userRouter;
+    public setRoutes() {
+        console.log("ouch")
+        this.userRouter.get("/", this.userController.getAllUser)
+        this.userRouter.post("/create", this.userController.addNewUser)
+    }
+}

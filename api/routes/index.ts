@@ -1,8 +1,16 @@
-import express, { Router } from "express";
-import userRouter from "./userRoutes";
+import { Router } from "express";
+import { UserRoutes } from "./userRoutes";
 
-const router: Router = express.Router();
+export class Routes {
+    public router: Router
+    public userRoutes: UserRoutes
+    constructor() {
+        this.userRoutes = new UserRoutes()
+        this.router = Router({ mergeParams: true })
+        this.setRoutes()
+    }
 
-router.use("/user", userRouter);
-
-export default router
+    public setRoutes() {
+        this.router.use("/user", this.userRoutes.userRouter)
+    }
+}
