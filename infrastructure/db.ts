@@ -10,8 +10,8 @@ const config: ConnectionOptions = {
     database: "momentonft",
     synchronize: false,
     logging: false,
-    entities: ['../api/entities/**/*.ts'],
-    migrations: ['../migrations/**/*.ts'],
+    entities: ['api/models/**/*.ts'],
+    migrations: ['migrations/**/*.ts'],
     cli: {
         migrationsDir: "migrations"
     }

@@ -2,11 +2,11 @@
    "type": "postgres",
    "host": "localhost",
    "port": 5432,
-   "username": "test",
-   "password": "test",
-   "database": "test",
+   "username": "postgres",
+   "password": "root",
+   "database": "momentonft",
    "synchronize": true,
-   "logging": false,
+   "logging": true,
    "entities": [
       "api/entities/**/*.ts"
    ],

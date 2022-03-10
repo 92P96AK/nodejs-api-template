@@ -1,18 +1,42 @@
-import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
 @Entity()
 export class User {
 
-    @PrimaryGeneratedColumn()
-    id: number;
+    @PrimaryGeneratedColumn("uuid")
+    id: string;
 
     @Column()
-    firstName: string;
+    username: string;
 
     @Column()
-    lastName: string;
+    name: string;
 
     @Column()
-    age: number;
+    email: string;
+
+    @Column()
+    statusMessage: string;
+
+    @Column()
+    password: string;
+
+    @Column()
+    googleUserId: string;
+
+    @Column()
+    appleUserId: string;
+
+    @Column()
+    verified: boolean;
+
+    @Column()
+    profileImageUrl: string;
+
+    @Column()
+    disabled: boolean;
+
+    @Column()
+    is_creator: boolean;
 
 }

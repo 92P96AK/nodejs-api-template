@@ -1,5 +1,27 @@
 import { Request } from "express";
 import * as jwt from "jsonwebtoken";
+import { UserModel } from "../../interfaces";
+import { userService } from "../services";
+
+export const createUser = async (req: any, res: any) => {
+    try {
+        const payload: UserModel = req.body;
+        const data = await userService.createUser(payload)
+
+        res.apiSuccess({
+            message: "User Created Successfully",
+            data
+        })
+    } catch (error: any) {
+        res.apiFail({
+            message: error.message || "Error Occured",
+            status: {
+                code: 400
+            },
+            error
+        })
+    }
+}
 
 export const getOneuser = (req: any, res: any) => {
     try {
