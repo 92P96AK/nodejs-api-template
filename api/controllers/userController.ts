@@ -1,7 +1,7 @@
 import { Request } from "express";
 import * as jwt from "jsonwebtoken";
 
-export const getOneuser = (req: Request, res: any) => {
+export const getOneuser = (req: any, res: any) => {
     try {
         res.apiSuccess({
             data: "get one user"
