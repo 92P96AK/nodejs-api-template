@@ -5,7 +5,6 @@ import jwt from "jsonwebtoken";
 import { User } from '@prisma/client';
 const TOKEN_VALID_DAYS = 30;
 const JWT_SECRET = "this is secret";
-const expireOn = Math.floor(Date.now() / 1000) + (60 * 60 * TOKEN_VALID_DAYS);
 export class UserController {
 
     public async addNewUser(req: any, res: any) {
@@ -19,6 +18,7 @@ export class UserController {
             const salt = bcrypt.genSaltSync(10);
             payload.password = await bcrypt.hash(payload.password!, salt);
             const user = await userService.addNewUser(payload);
+            const expireOn = Math.floor(Date.now() / 1000) + (60 * 60 * TOKEN_VALID_DAYS);
 
             res.apiSuccess({
                 message: "User Signed Up Successfully",
@@ -84,6 +84,8 @@ export class UserController {
                     message: "Invalid Login Credential"
                 }
             }
+            const expireOn = Math.floor(Date.now() / 1000) + (60 * 60 * TOKEN_VALID_DAYS);
+
             res.apiSuccess({
                 message: "Loggedin Successfully",
                 data: {
