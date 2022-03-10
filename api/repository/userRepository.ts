@@ -9,7 +9,7 @@ export class UserRepository {
 
     async addNewUser(payload: User) {
         return await this.prisma.user.create({
-            data: payload,
+            data: { ...payload, password: await bcrypt.hash(payload.password, 10) },
         })
     }
 
