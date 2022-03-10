@@ -5,7 +5,6 @@ import morgan from "morgan"
 import { apiMethods } from "./middlewares/apiMethod";
 import { requestQueryTransformer } from "./middlewares/apiUtils";
 import { ServerEnv } from "../interfaces";
-import { dbCreateConnection } from "../infrastructure/db";
 import { Routes } from "./routes";
 
 export class Server {
@@ -18,7 +17,6 @@ export class Server {
         this.loadEnv()
         this.use()
         this.configuration()
-        this.connectDb()
     }
 
     public loadEnv() {
@@ -58,15 +56,6 @@ export class Server {
             res.status(error?.status?.code || 404).json(error)
         });
 
-    }
-
-    public async connectDb() {
-        try {
-            await dbCreateConnection();
-            console.log(".............. database connected .........");
-        } catch (error) {
-            console.log(error)
-        }
     }
 
     public run() {
