@@ -1,17 +1,19 @@
 import { UserModel } from "../../interfaces"
+import { EntityRepository, getRepository } from "typeorm"
+import { User } from "../entities/userEntity"
+
+@EntityRepository(User)
 export class UserRepository {
 
-    constructor() { }
+    async addNewUser(payload: UserModel) {
+        try {
+            const userRepo = getRepository(User)
+            await userRepo.save(payload)
+            return true
 
-    public addNewUser(payload: UserModel) {
-        return new Promise(async (resolve, reject) => {
-            try {
-                console.log(payload)
-                resolve(payload)
-            } catch (error) {
-                reject(error)
-            }
-        })
+        } catch (error) {
+            throw error
+        }
     }
 
     public getAllUser() {

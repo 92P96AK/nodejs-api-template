@@ -1,3 +1,5 @@
+import { Timestamp } from "typeorm";
+
 export interface UserModel {
     id: string;
     username: string;
@@ -9,6 +11,9 @@ export interface UserModel {
     appleUserId?: string;
     profileImageUrl?: string;
     disabled?: boolean;
-    is_creator?: boolean;
+    isCreator?: boolean;
     verified?: boolean;
+    createdAt?: Timestamp;
+    updatedAt?: Timestamp;
+    deletedAt?: Timestamp;
 }

@@ -1,5 +1,5 @@
 import { Connection, getConnectionManager, ConnectionOptions } from 'typeorm';
-
+import { User } from '../api/entities/userEntity';
 const config: ConnectionOptions = {
     type: 'postgres',
     name: 'default',
@@ -10,7 +10,7 @@ const config: ConnectionOptions = {
     database: "momentonft",
     synchronize: false,
     logging: false,
-    entities: ['api/models/**/*.ts'],
+    entities: [User],
     migrations: ['migrations/**/*.ts'],
     cli: {
         migrationsDir: "migrations"

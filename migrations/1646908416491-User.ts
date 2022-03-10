@@ -67,14 +67,26 @@ export class User1646908416491 implements MigrationInterface {
                     default: false,
                 },
                 {
-                    name: "is_creator",
+                    name: "verified",
                     type: "boolean",
                     default: false,
                 },
                 {
-                    name: "verified",
+                    name: "isCreator",
                     type: "boolean",
                     default: false,
+                },
+                {
+                    name: "createdAt",
+                    type: "timestamp",
+                },
+                {
+                    name: "updatedAt",
+                    type: "timestamp",
+                },
+                {
+                    name: "deletedAt",
+                    type: "timestamp",
                 }
             ]
         }), true)
