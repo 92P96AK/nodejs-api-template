@@ -11,7 +11,6 @@ export class UserRoutes {
     }
 
     public setRoutes() {
-        console.log("ouch")
         this.userRouter.get("/", this.userController.getAllUser)
         this.userRouter.post("/create", this.userController.addNewUser)
     }
