@@ -25,9 +25,9 @@ export class UserService {
         }
     }
 
-    public async getUserByEmail(email: string) {
+    public async getOneUser(payload: User) {
         try {
-            const data = await this.userRepo.getUserByEmail(email)
+            const data = await this.userRepo.getOneUser(payload)
             return data;
         } catch (error) {
             throw error

@@ -11,7 +11,7 @@ interface ApiSuccess {
     status?: Status
 }
 
-interface ApiFail {
+export interface ApiFail {
     message?: string
     error?: any
     status?: Status

@@ -11,6 +11,14 @@ export class UserController {
         try {
             const userService: UserService = new UserService();
             const payload: User = req.body;
+            const checkpayload: any = {
+                email: payload.email,
+                username: payload.username
+            }
+            const dbUser = await userService.getOneUser(checkpayload)
+            if (dbUser) throw {
+                message: "Email or username already exist"
+            }
             payload.id = uuidv4();
             payload.disabled = false;
             payload.isCreator = false;
@@ -35,9 +43,9 @@ export class UserController {
                     success: true
                 }
             })
-        } catch (error) {
+        } catch (error: any) {
             res.apiFail({
-                message: "Error while adding user ",
+                message: error?.message || "Error while adding user ",
                 error,
                 status: {
                     code: 404,
@@ -76,7 +84,10 @@ export class UserController {
         try {
             const userService: UserService = new UserService()
             const { email, password } = req.body
-            const user = await userService.getUserByEmail(email)
+            const payload: any = {
+                email,
+            }
+            const user = await userService.getOneUser(payload)
             if (!user || user.disabled) throw {
                 message: "Invalid Login Credential"
             }

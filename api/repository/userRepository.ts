@@ -17,10 +17,11 @@ export class UserRepository {
         return await this.prisma.user.findMany()
     }
 
-    public async getUserByEmail(email: string) {
+    //  get one user by condition
+    public async getOneUser(payload: User) {
         return await this.prisma.user.findFirst({
             where: {
-                email
+                ...payload
             }
         })
     }
