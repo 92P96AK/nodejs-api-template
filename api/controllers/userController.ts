@@ -49,6 +49,7 @@ export class UserController {
 
     async getAllUser(req: any, res: any) {
         try {
+            // need to implement pagination
             const userService: UserService = new UserService()
             const data = await userService.getAllUser()
             res.apiSuccess({
