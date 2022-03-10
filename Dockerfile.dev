@@ -1,0 +1,16 @@
+FROM node:14
+
+RUN mkdir -p /app
+WORKDIR /app
+
+COPY package*.json ./
+COPY prisma ./prisma/
+COPY tsconfig.json ./
+COPY . .
+
+RUN npm install
+RUN npx prisma generate
+
+VOLUME [ "/app" ]
+
+CMD ["npm", "run", "start-dev"]

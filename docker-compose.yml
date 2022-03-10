@@ -1,0 +1,24 @@
+version: "3.8"
+services:
+  momento:
+    restart: "always"
+    env_file: ".env"
+    build:
+      context: "."
+      dockerfile: "./Dockerfile.dev"
+    depends_on:
+        - postgres
+    ports:
+      - "9001:9001"
+    volumes:
+      - "./src:/app/src"
+      - "./prisma:/app/prisma"
+
+  postgres:
+    image: "postgres:14"
+    ports:
+      - "5433:5433"
+    environment:
+      - "POSTGRES_USER=${DATABASE_USERNAME}"
+      - "POSTGRES_PASSWORD=${DATABASE_PASSWORD}"
+      - "POSTGRES_DB=${DATABASE_NAME}"
