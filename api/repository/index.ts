@@ -1,1 +1,1 @@
-export * as userRepository from "./userRepository"
+export { UserRepository } from "./userRepository"
