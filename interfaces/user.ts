@@ -1,4 +1,3 @@
-import { Timestamp } from "typeorm";
 
 export interface UserModel {
     id: string;
@@ -13,7 +12,7 @@ export interface UserModel {
     disabled?: boolean;
     isCreator?: boolean;
     verified?: boolean;
-    createdAt?: Timestamp;
-    updatedAt?: Timestamp;
-    deletedAt?: Timestamp;
+    createdAt: string | Date;
+    updatedAt?: string | Date;
+    deletedAt?: string | Date;
 }

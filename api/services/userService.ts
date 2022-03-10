@@ -1,7 +1,6 @@
 import { UserModel } from "../../interfaces"
 import { UserRepository } from "../repository"
 export class UserService {
-
     public userRepo: UserRepository
 
     constructor() {
@@ -14,6 +13,7 @@ export class UserService {
                 const data = await this.userRepo.addNewUser(payload)
                 resolve(data)
             } catch (error) {
+                console.log({ error })
                 reject(error)
             }
         })

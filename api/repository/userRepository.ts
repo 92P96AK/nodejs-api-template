@@ -1,19 +1,17 @@
 import { UserModel } from "../../interfaces"
-import { EntityRepository, getRepository } from "typeorm"
-import { User } from "../entities/userEntity"
+import { PrismaClient } from '@prisma/client'
 
-@EntityRepository(User)
 export class UserRepository {
+    public prisma: PrismaClient
+
+    constructor() {
+        this.prisma = new PrismaClient()
+    }
 
     async addNewUser(payload: UserModel) {
-        try {
-            const userRepo = getRepository(User)
-            await userRepo.save(payload)
-            return true
-
-        } catch (error) {
-            throw error
-        }
+        return await this.prisma.user.create({
+            data: payload,
+        })
     }
 
     public getAllUser() {
