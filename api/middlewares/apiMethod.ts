@@ -1,5 +1,4 @@
-
-export const apiMethods = (req, res, next) => {
+export const apiMethods = (_, res, next) => {
     res.apiSuccess = ({
         message = "Success",
         data,
@@ -8,7 +7,7 @@ export const apiMethods = (req, res, next) => {
             success: true
         }
     }) => {
-        res.status(status.code).json({ message, status, data });
+        res.status(status.code || 200).json({ message, status, data });
     };
     res.apiFail = ({
         message = "Error Occured",
@@ -18,7 +17,7 @@ export const apiMethods = (req, res, next) => {
             success: false
         }
     }) => {
-        res.status(status.code).json({
+        res.status(status.code || 404).json({
             message, status: {
                 code: status.code || 400,
                 success: status.success || false

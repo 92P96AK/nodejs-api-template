@@ -1,7 +1,7 @@
-export interface RequestQueryDto{
-    keyword?:string
-    pageSize?:number
-    limit?:number
-    sort_by ?:string
-    sort_value ?:string
+export interface RequestQueryDto {
+    keyword?: string
+    pageSize?: number
+    limit?: number
+    sortBy?: string
+    sortValue?: string
 }

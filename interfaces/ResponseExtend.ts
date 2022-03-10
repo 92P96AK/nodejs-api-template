@@ -1,8 +1,8 @@
 import { Response } from "express";
 
 export interface ResponseExtend extends Response {
-    apiSuccess: () => ApiSuccess;
-    apiFail: () => ApiFail;
+    apiSuccess: (fn: ApiSuccess) => void;
+    apiFail: (fn: ApiFail) => void;
 }
 
 interface ApiSuccess {
