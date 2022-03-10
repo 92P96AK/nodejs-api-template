@@ -61,7 +61,7 @@ export class UserController {
             })
         } catch (error) {
             res.apiFail({
-                message: "Error while fetching user ",
+                message: "Error While Fetching Users",
                 error,
                 status: {
                     code: 404,
@@ -77,7 +77,7 @@ export class UserController {
             const { email, password } = req.body
             const user = await userService.getUserByEmail(email)
             if (!user || user.disabled) throw {
-                message: "User Not Found"
+                message: "Invalid Login Credential"
             }
             if (!bcrypt.compareSync(password, user.password!)) {
                 throw {
