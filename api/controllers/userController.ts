@@ -1,22 +1,35 @@
 import { v4 as uuidv4 } from 'uuid';
-import { UserModel } from "../../interfaces"
-import { UserService } from "../services"
+import { UserService } from "../services";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import { User } from '@prisma/client';
+const TOKEN_VALID_DAYS = 30;
+const JWT_SECRET = "this is secret";
+const expireOn = Math.floor(Date.now() / 1000) + (60 * 60 * TOKEN_VALID_DAYS);
 export class UserController {
-    constructor() { }
 
     public async addNewUser(req: any, res: any) {
         try {
-            const userService: UserService = new UserService()
-            const payload: UserModel = req.body
-            payload.id = uuidv4()
-            payload.disabled = false
-            payload.isCreator = false
-            payload.verified = false
-            // payload.createdAt= 
-            const data = await userService.addNewUser(payload)
+            const userService: UserService = new UserService();
+            const payload: User = req.body;
+            payload.id = uuidv4();
+            payload.disabled = false;
+            payload.isCreator = false;
+            payload.verified = false;
+            const salt = bcrypt.genSaltSync(10);
+            payload.password = await bcrypt.hash(payload.password!, salt);
+            const user = await userService.addNewUser(payload);
+
             res.apiSuccess({
-                message: "User Added Successfully",
-                data,
+                message: "User Signed Up Successfully",
+                data: {
+                    user,
+                    token: jwt.sign({
+                        exp: expireOn,
+                        data: user
+                    }, JWT_SECRET),
+                    expireOn
+                },
                 status: {
                     code: 200,
                     success: true
@@ -49,6 +62,47 @@ export class UserController {
         } catch (error) {
             res.apiFail({
                 message: "Error while fetching user ",
+                error,
+                status: {
+                    code: 404,
+                    success: false
+                }
+            })
+        }
+    }
+
+    public async login(req: any, res: any) {
+        try {
+            const userService: UserService = new UserService()
+            const { email, password } = req.body
+            const user = await userService.getUserByEmail(email)
+            if (!user || user.disabled) throw {
+                message: "User Not Found"
+            }
+            if (!bcrypt.compareSync(password, user.password!)) {
+                throw {
+                    message: "Invalid Login Credential"
+                }
+            }
+            res.apiSuccess({
+                message: "Loggedin Successfully",
+                data: {
+                    user,
+                    token: jwt.sign({
+                        exp: expireOn,
+                        data: user
+                    }, JWT_SECRET),
+                    expireOn
+                },
+                status: {
+                    code: 200,
+                    success: true
+                }
+            })
+
+        } catch (error) {
+            res.apiFail({
+                message: "Invalid Login Credential",
                 error,
                 status: {
                     code: 404,

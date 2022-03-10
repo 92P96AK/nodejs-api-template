@@ -6,7 +6,6 @@ import { apiMethods } from "./middlewares/apiMethod";
 import { requestQueryTransformer } from "./middlewares/apiUtils";
 import { ServerEnv } from "../interfaces";
 import { Routes } from "./routes";
-
 export class Server {
     private app: Application
     private routes: Routes

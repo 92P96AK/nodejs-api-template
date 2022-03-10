@@ -13,5 +13,6 @@ export class UserRoutes {
     public setRoutes() {
         this.userRouter.get("/", this.userController.getAllUser)
         this.userRouter.post("/create", this.userController.addNewUser)
+        this.userRouter.post("/login", this.userController.login)
     }
 }

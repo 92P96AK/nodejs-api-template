@@ -1,4 +1,4 @@
-import { UserModel } from "../../interfaces"
+import { User } from "@prisma/client"
 import { UserRepository } from "../repository"
 export class UserService {
     public userRepo: UserRepository
@@ -7,26 +7,30 @@ export class UserService {
         this.userRepo = new UserRepository()
     }
 
-    public addNewUser(payload: UserModel) {
-        return new Promise(async (resolve, reject) => {
-            try {
-                const data = await this.userRepo.addNewUser(payload)
-                resolve(data)
-            } catch (error) {
-                console.log({ error })
-                reject(error)
-            }
-        })
+    public async addNewUser(payload: User) {
+        try {
+            const user = await this.userRepo.addNewUser(payload)
+            return user
+        } catch (error) {
+            throw error
+        }
     }
 
     public async getAllUser() {
-        return new Promise(async (resolve, reject) => {
-            try {
-                const data = await this.userRepo.getAllUser()
-                resolve(data)
-            } catch (error) {
-                reject(error)
-            }
-        })
+        try {
+            const data = await this.userRepo.getAllUser()
+            return data
+        } catch (error) {
+            throw error
+        }
+    }
+
+    public async getUserByEmail(email: string) {
+        try {
+            const data = await this.userRepo.getUserByEmail(email)
+            return data;
+        } catch (error) {
+            throw error
+        }
     }
 }

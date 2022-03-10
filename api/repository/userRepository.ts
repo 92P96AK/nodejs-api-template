@@ -1,5 +1,4 @@
-import { UserModel } from "../../interfaces"
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient, User } from '@prisma/client'
 
 export class UserRepository {
     public prisma: PrismaClient
@@ -8,18 +7,20 @@ export class UserRepository {
         this.prisma = new PrismaClient()
     }
 
-    async addNewUser(payload: UserModel) {
+    async addNewUser(payload: User) {
         return await this.prisma.user.create({
             data: payload,
         })
     }
 
-    public getAllUser() {
-        return new Promise(async (resolve, reject) => {
-            try {
-                resolve(true)
-            } catch (error) {
-                reject(error)
+    async getAllUser() {
+        return await this.prisma.user.findMany()
+    }
+
+    public async getUserByEmail(email: string) {
+        return await this.prisma.user.findFirst({
+            where: {
+                email
             }
         })
     }
