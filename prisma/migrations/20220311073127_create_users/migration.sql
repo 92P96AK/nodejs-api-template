@@ -14,6 +14,7 @@ CREATE TABLE "User" (
     "verified" BOOLEAN DEFAULT false,
     "createdAt" TIMESTAMPTZ(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMPTZ(6),
+    "deletedAt" TIMESTAMPTZ(6),
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
