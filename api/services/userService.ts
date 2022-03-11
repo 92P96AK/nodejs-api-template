@@ -1,7 +1,7 @@
 import { User } from "@prisma/client"
 import { UserRepository } from "../repository"
 export class UserService {
-    public userRepo: UserRepository
+    private userRepo: UserRepository
 
     constructor() {
         this.userRepo = new UserRepository()
