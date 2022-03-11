@@ -1,10 +1,6 @@
-type LogLevel = 'info' | 'query' | 'warn' | 'error'
-type LogDefinition = {
-  emit: 'stdout' | 'event'
-  level: LogLevel
-}
+import { Prisma } from "@prisma/client"
 
-export const prismaConfig: { log: (LogLevel | LogDefinition)[] } = {
+export const prismaConfig: Prisma.Subset<Prisma.PrismaClientOptions, Prisma.PrismaClientOptions> = {
   log: [
     {
       emit: 'event',
@@ -22,5 +18,6 @@ export const prismaConfig: { log: (LogLevel | LogDefinition)[] } = {
       emit: 'stdout',
       level: 'warn',
     },
-  ]
+  ],
+  errorFormat: 'pretty'
 }
