@@ -4,8 +4,11 @@
   "description": "description",
   "main": "dist/index.js",
   "scripts": {
-    "start-dev": "ts-node-dev ./server.ts",
+    "start-dev": "ts-node-dev --no-notify --respawn --transpile-only ./server.ts",
     "start": "forever start -v -c ts-node ./server.ts",
+    "migrate-dev": "prisma migrate dev --name $name",
+    "migrate-deploy": "prisma migrate deploy",
+    "prisma:gen": "prisma generate",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
