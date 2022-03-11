@@ -18,16 +18,11 @@ export class Server {
         this.configuration()
     }
 
-    public loadEnv() {
+    private loadEnv() {
         this.env = { port: 9000 }
     }
 
-    public configuration() {
-        this.app.set("port", this.env.port)
-
-    }
-
-    public use() {
+    private use() {
         this.app.use(cors())
         this.app.use(morgan('combined'))
         this.app.use(express.json());
@@ -56,6 +51,12 @@ export class Server {
         });
 
     }
+
+    private configuration() {
+        this.app.set("port", this.env.port)
+
+    }
+
 
     public run() {
         this.app.listen(this.app.get("port"), () => {
