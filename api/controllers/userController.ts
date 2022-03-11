@@ -5,9 +5,8 @@ import jwt from "jsonwebtoken";
 import { User } from '@prisma/client';
 const TOKEN_VALID_DAYS = 30;
 const JWT_SECRET = "this is secret";
-export class UserController {
-
-    public async addNewUser(req: any, res: any) {
+class UserController {
+    static async addNewUser(req: any, res: any) {
         try {
             const userService: UserService = new UserService();
             const payload: User = req.body;
@@ -55,7 +54,7 @@ export class UserController {
         }
     }
 
-    async getAllUser(req: any, res: any) {
+    static async getAllUser(req: any, res: any) {
         try {
             // need to implement pagination
             const userService: UserService = new UserService()
@@ -80,7 +79,7 @@ export class UserController {
         }
     }
 
-    public async login(req: any, res: any) {
+    static async login(req: any, res: any) {
         try {
             const userService: UserService = new UserService()
             const { email, password } = req.body
@@ -126,3 +125,5 @@ export class UserController {
         }
     }
 }
+
+export { UserController }
