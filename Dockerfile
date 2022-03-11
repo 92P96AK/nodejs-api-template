@@ -12,6 +12,6 @@ COPY tsconfig.json ./
 COPY . .
 
 RUN npm install --production
-RUN npx prisma generate
+RUN npx prisma migrate deploy
 
 CMD ["npm", "run", "start"]
