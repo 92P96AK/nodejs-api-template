@@ -1,10 +1,9 @@
-import { PrismaClient, User } from '@prisma/client'
+import { User } from '@prisma/client'
+import { BaseRepository } from './baseRepository'
 
-export class UserRepository {
-    public prisma: PrismaClient
-
+class UserRepository extends BaseRepository {
     constructor() {
-        this.prisma = new PrismaClient()
+        super()
     }
 
     async addNewUser(payload: User) {
@@ -17,8 +16,7 @@ export class UserRepository {
         return await this.prisma.user.findMany()
     }
 
-    //  get one user by condition
-    public async getOneUser(payload: User) {
+    async getOneUser(payload: User) {
         return await this.prisma.user.findFirst({
             where: {
                 ...payload
@@ -26,3 +24,5 @@ export class UserRepository {
         })
     }
 }
+
+export { UserRepository }
