@@ -1,18 +1,18 @@
 import { Router } from "express";
 import { UserController } from "../controllers";
-export class UserRoutes {
+class UserRoutes {
     public userRouter: Router
-    public userController: UserController
 
     constructor() {
-        this.userController = new UserController()
         this.userRouter = Router({ mergeParams: true })
         this.setRoutes()
     }
 
     public setRoutes() {
-        this.userRouter.get("/", this.userController.getAllUser)
-        this.userRouter.post("/create", this.userController.addNewUser)
-        this.userRouter.post("/login", this.userController.login)
+        this.userRouter.get("/", UserController.getAllUser)
+        this.userRouter.post("/create", UserController.addNewUser)
+        this.userRouter.post("/login", UserController.login)
     }
 }
+
+export { UserRoutes }
