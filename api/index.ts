@@ -6,6 +6,8 @@ import { apiMethods } from "./middlewares/apiMethod";
 import { requestQueryTransformer } from "./middlewares/apiUtils";
 import { ServerEnv } from "../interfaces";
 import { Routes } from "./routes";
+import { BaseRepository } from "./repository";
+
 export class Server {
     private app: Application
     private routes: Routes
@@ -16,6 +18,7 @@ export class Server {
         this.loadEnv()
         this.use()
         this.configuration()
+        new BaseRepository().configureSoftDelete()
     }
 
     private loadEnv() {
@@ -56,7 +59,6 @@ export class Server {
         this.app.set("port", this.env.port)
 
     }
-
 
     public run() {
         this.app.listen(this.app.get("port"), () => {

@@ -8,7 +8,7 @@ class UserRepository extends BaseRepository {
 
     async addNewUser(payload: User) {
         return await this.prisma.user.create({
-            data: payload,
+            data: payload
         })
     }
 
