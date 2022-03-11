@@ -1,12 +1,12 @@
 import { Router } from "express";
 import { UserRoutes } from "./userRoutes";
 
-export class Routes {
+class Routes {
     public router: Router
     public userRoutes: UserRoutes
     constructor() {
-        this.userRoutes = new UserRoutes()
         this.router = Router({ mergeParams: true })
+        this.userRoutes = new UserRoutes()
         this.setRoutes()
     }
 
@@ -14,3 +14,5 @@ export class Routes {
         this.router.use("/user", this.userRoutes.userRouter)
     }
 }
+
+export { Routes }
