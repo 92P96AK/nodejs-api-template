@@ -9,9 +9,9 @@ datasource db {
 
 model User {
   id              String    @id @db.Uuid
-  username        String    @db.VarChar(50)@unique
+  username        String    @unique @db.VarChar(50)
   name            String?   @db.VarChar(100)
-  email           String    @db.VarChar(50)@unique
+  email           String    @unique @db.VarChar(50)
   statusMessage   String?   @db.VarChar(300)
   password        String?   @db.VarChar(300)
   googleUserId    String?   @db.VarChar(200)
@@ -20,6 +20,7 @@ model User {
   disabled        Boolean?  @default(false)
   isCreator       Boolean?  @default(false)
   verified        Boolean?  @default(false)
-  createdAt       DateTime  @db.Timestamptz(6)@default(now())
+  createdAt       DateTime  @default(now()) @db.Timestamptz(6)
   updatedAt       DateTime? @db.Timestamptz(6)
+  deletedAt       DateTime? @db.Timestamptz(6)
 }
