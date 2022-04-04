@@ -9,7 +9,7 @@ datasource db {
 }
 
 model User {
-  id        String    @id @db.Uuid
+  id        String    @id @default(uuid()) @db.Uuid
   username  String    @unique @db.VarChar(50)
   name      String?   @db.VarChar(100)
   email     String    @unique @db.VarChar(50)
@@ -18,4 +18,6 @@ model User {
   createdAt DateTime  @default(now()) @db.Timestamptz(6)
   updatedAt DateTime? @db.Timestamptz(6)
   deletedAt DateTime? @db.Timestamptz(6)
+
+  @@map("users")
 }

@@ -8,29 +8,14 @@ export class UserService {
     }
 
     public async addNewUser(payload: User) {
-        try {
-            const user = await this.userRepo.addNewUser(payload)
-            return user
-        } catch (error) {
-            throw error
-        }
+        return await this.userRepo.addNewUser(payload)
     }
 
     public async getAllUser() {
-        try {
-            const data = await this.userRepo.getAllUser()
-            return data
-        } catch (error) {
-            throw error
-        }
+        return await this.userRepo.getAllUser()
     }
 
     public async getOneUser(payload: User) {
-        try {
-            const data = await this.userRepo.getOneUser(payload)
-            return data;
-        } catch (error) {
-            throw error
-        }
+        return await this.userRepo.getOneUser(payload)
     }
 }

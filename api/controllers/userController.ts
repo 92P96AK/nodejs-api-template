@@ -1,129 +1,130 @@
-import { v4 as uuidv4 } from 'uuid';
-import { UserService } from "../services";
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
-import { User } from '@prisma/client';
-const TOKEN_VALID_DAYS = 30;
-const JWT_SECRET = "this is secret";
-class UserController {
-    static async addNewUser(req: any, res: any) {
+import {
+    UserService,
+} from '../services'
+import bcrypt from 'bcryptjs'
+import { User } from '@prisma/client'
+import { Request, Response } from 'express'
+import { jwtToken } from '../../utils'
+export class UserController {
+    private userService: UserService
+
+    constructor() {
+        this.userService = new UserService()
+    }
+
+    async addNewUser(req: Request, res: Response) {
         try {
-            const userService: UserService = new UserService();
-            const payload: User = req.body;
+            const payload: User = req.body
             const checkpayload: any = {
                 email: payload.email,
-                username: payload.username
+                username: payload.username,
             }
-            const dbUser = await userService.getOneUser(checkpayload)
-            if (dbUser) throw {
-                message: "Email or username already exist"
-            }
-            payload.id = uuidv4();
-            payload.disabled = false;
-            payload.isCreator = false;
-            payload.verified = false;
-            const salt = bcrypt.genSaltSync(10);
-            payload.password = await bcrypt.hash(payload.password!, salt);
-            const user = await userService.addNewUser(payload);
-            const expireOn = Math.floor(Date.now() / 1000) + (60 * 60 * TOKEN_VALID_DAYS);
-
+            const dbUser = await this.userService.getOneUser(checkpayload)
+            if (dbUser)
+                throw {
+                    message: 'Email or Username already exist',
+                }
+            payload.verified = false
+            const salt = bcrypt.genSaltSync(10)
+            payload.password = await bcrypt.hash(payload.password!, salt)
+            const user = await this.userService.addNewUser(payload)
             res.apiSuccess({
-                message: "User Signed Up Successfully",
+                message: 'User Signed Up Successfully',
                 data: {
                     user,
-                    token: jwt.sign({
-                        exp: expireOn,
-                        data: user
-                    }, JWT_SECRET),
-                    expireOn
+                    token: jwtToken(user.id),
                 },
-                status: {
-                    code: 200,
-                    success: true
-                }
             })
         } catch (error: any) {
             res.apiFail({
-                message: error?.message || "Error while adding user ",
+                message: 'Failed to create account',
                 error,
-                status: {
-                    code: 404,
-                    success: false
-                }
             })
         }
     }
 
-    static async getAllUser(req: any, res: any) {
+    async getAllUser(_, res: Response) {
         try {
-            // need to implement pagination
-            const userService: UserService = new UserService()
-            const data = await userService.getAllUser()
+            const data = await this.userService.getAllUser()
             res.apiSuccess({
-                message: "User Fetched Successfully",
+                message: 'User Fetched Successfully',
                 data,
-                status: {
-                    code: 200,
-                    success: true
-                }
             })
         } catch (error) {
             res.apiFail({
-                message: "Error While Fetching Users",
+                message: 'Failed to get users',
                 error,
-                status: {
-                    code: 404,
-                    success: false
-                }
             })
         }
     }
 
-    static async login(req: any, res: any) {
+    async getOneUser(req: Request, res: Response) {
         try {
-            const userService: UserService = new UserService()
-            const { email, password } = req.body
+            const { id } = req.params
             const payload: any = {
+                id,
+            }
+            const user = await this.userService.getOneUser(payload)
+
+            const data = {
+                user,
+            }
+
+            res.apiSuccess({
+                message: 'User Fetched Successfully',
+                data,
+            })
+        } catch (error) {
+            res.apiFail({
+                message: 'Failed to get user',
+                error,
+            })
+        }
+    }
+
+    public async login(req: any, res: any) {
+        try {
+            const { email, password } = req.body
+            const payload: Partial<User> = {
                 email,
             }
-            const user = await userService.getOneUser(payload)
-            if (!user || user.disabled) throw {
-                message: "Invalid Login Credential"
-            }
+            const user = await this.userService.getOneUser(payload as User)
+            if (!user)
+                throw {
+                    message: 'Invalid Login Credential',
+                }
             if (!bcrypt.compareSync(password, user.password!)) {
                 throw {
-                    message: "Invalid Login Credential"
+                    message: 'Invalid Login Credential',
                 }
             }
-            const expireOn = Math.floor(Date.now() / 1000) + (60 * 60 * TOKEN_VALID_DAYS);
-
             res.apiSuccess({
-                message: "Loggedin Successfully",
+                message: 'Loggedin Successfully',
                 data: {
                     user,
-                    token: jwt.sign({
-                        exp: expireOn,
-                        data: user
-                    }, JWT_SECRET),
-                    expireOn
+                    token: jwtToken(user.id),
                 },
-                status: {
-                    code: 200,
-                    success: true
-                }
             })
-
         } catch (error) {
             res.apiFail({
-                message: "Invalid Login Credential",
+                message: 'Failed to login',
                 error,
-                status: {
-                    code: 404,
-                    success: false
-                }
+            })
+        }
+    }
+
+    public async getLoggedInUser(req: any, res: any) {
+        try {
+            const authUser: User = req.authUser
+            return res.apiSuccess({
+                data: authUser,
+                message: 'LoggedIn user fetched successfully',
+            })
+        } catch (error) {
+            return res.apiFail({
+                message: 'Failed to get logged in user',
+                error,
             })
         }
     }
 }
-
-export { UserController }

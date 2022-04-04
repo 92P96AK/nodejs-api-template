@@ -1,7 +1,7 @@
 import { User } from '@prisma/client'
 import { BaseRepository } from './baseRepository'
 
-class UserRepository extends BaseRepository {
+export class UserRepository extends BaseRepository {
     constructor() {
         super()
     }
@@ -24,5 +24,3 @@ class UserRepository extends BaseRepository {
         })
     }
 }
-
-export { UserRepository }

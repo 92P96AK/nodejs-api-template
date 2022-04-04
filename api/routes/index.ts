@@ -1,7 +1,6 @@
 import { Router } from "express";
 import { UserRoutes } from "./userRoutes";
-
-class Routes {
+export class Routes {
     public router: Router
     public userRoutes: UserRoutes
     constructor() {
@@ -14,5 +13,3 @@ class Routes {
         this.router.use("/user", this.userRoutes.userRouter)
     }
 }
-
-export { Routes }

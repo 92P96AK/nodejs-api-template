@@ -1,6 +1,6 @@
 require('dotenv').config()
 
-function loadFromEnv(key) {
+export const loadFromEnv = (key: string) => {
   if (typeof process.env[key] !== 'undefined') {
     return process.env[key]
   }
