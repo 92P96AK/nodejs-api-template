@@ -1,4 +1,4 @@
-import { Admin, User } from '@prisma/client'
+import { User } from '@prisma/client'
 import { RequestQueryDto } from '../../interfaces'
 
 declare global {

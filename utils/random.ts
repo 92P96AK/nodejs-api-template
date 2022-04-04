@@ -8,6 +8,5 @@ export const generateRandomString = length => {
          Math.floor(Math.random() * charactersLength),
       )
    }
-
    return result
 }

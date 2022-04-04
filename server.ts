@@ -1,4 +1,4 @@
-import { Server } from "./api";
+import { Server } from './api'
 
 const server = new Server()
 server.run()
