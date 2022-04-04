@@ -1,5 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["interactiveTransactions"]
 }
 
 datasource db {
@@ -8,19 +9,13 @@ datasource db {
 }
 
 model User {
-  id              String    @id @db.Uuid
-  username        String    @unique @db.VarChar(50)
-  name            String?   @db.VarChar(100)
-  email           String    @unique @db.VarChar(50)
-  statusMessage   String?   @db.VarChar(300)
-  password        String?   @db.VarChar(300)
-  googleUserId    String?   @db.VarChar(200)
-  appleUserId     String?   @db.VarChar(200)
-  profileImageUrl String?   @db.VarChar(500)
-  disabled        Boolean?  @default(false)
-  isCreator       Boolean?  @default(false)
-  verified        Boolean?  @default(false)
-  createdAt       DateTime  @default(now()) @db.Timestamptz(6)
-  updatedAt       DateTime? @db.Timestamptz(6)
-  deletedAt       DateTime? @db.Timestamptz(6)
+  id        String    @id @db.Uuid
+  username  String    @unique @db.VarChar(50)
+  name      String?   @db.VarChar(100)
+  email     String    @unique @db.VarChar(50)
+  password  String?   @db.VarChar(300)
+  verified  Boolean?  @default(false)
+  createdAt DateTime  @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime? @db.Timestamptz(6)
+  deletedAt DateTime? @db.Timestamptz(6)
 }

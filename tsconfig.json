@@ -1,37 +1,37 @@
 {
-    "compilerOptions": {
-      "target": "es5",
-      "module": "commonjs",
-      "strict": true,
-      "esModuleInterop": true,
-      "skipLibCheck": true,
-      "forceConsistentCasingInFileNames": true,
-      "emitDecoratorMetadata": true,
-      "experimentalDecorators": true,
-      "noImplicitAny": false,
-      "sourceMap": true,
-      "removeComments": true,
-      "preserveConstEnums": true,
-      "declaration": true,
-      "strictPropertyInitialization": false,
-      "lib": [
-        "es6",
-        "es5"
-      ],
-      "moduleResolution": "node",
-      "noUnusedLocals": true,
-      "noImplicitReturns": true,
-      "noImplicitThis": true,
-      "noUnusedParameters": false,
-      "pretty": true,
-      "noFallthroughCasesInSwitch": true,
-      "allowUnreachableCode": false,
-      "outDir": "./dist",
-      "baseUrl": "./api",
-      "typeRoots": ["@types", "node_modules/@types"],
-    },
-    "include": [
-      "api/**/*.ts"
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "noImplicitAny": false,
+    "sourceMap": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "declaration": true,
+    "strictPropertyInitialization": false,
+    "lib": [
+      "es6",
+      "es5"
     ],
-    "exclude": ["node_modules", "**/node_modules/*"]
-  }
+    "moduleResolution": "node",
+    "noUnusedLocals": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noUnusedParameters": false,
+    "pretty": true,
+    "noFallthroughCasesInSwitch": true,
+    "allowUnreachableCode": false,
+    "outDir": "./dist",
+    "baseUrl": "./api",
+    "typeRoots": ["@types", "node_modules/@types"],
+  },
+  "include": [
+    "api/**/*.ts"
+  ],
+  "exclude": ["node_modules", "**/node_modules/*"]
+}

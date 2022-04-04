@@ -1,0 +1,87 @@
+{
+   "swagger": "2.0",
+   "info": {
+      "version": "0.0.1",
+      "description": "Api Documentation",
+      "title": "Api"
+   },
+   "schemes": [
+      "http",
+      "https"
+   ],
+   "host": "localhost:9000",
+   "basePath": "/api/v1",
+   "paths": {
+      "/user": {
+         "get": {
+            "tags": [
+               "User"
+            ],
+            "summary": "Get all users",
+            "responses": {
+               "200": {
+                  "description": "OK",
+                  "schema": {
+                     "$ref": "#/definitions/Users"
+                  }
+               }
+            }
+         }
+      }
+   },
+   "definitions": {
+      "User": {
+         "type": "object",
+         "properties": {
+            "id": {
+               "type": "string",
+               "format": "uuid"
+            },
+            "username": {
+               "type": "string"
+            },
+            "name": {
+               "type": "string"
+            },
+            "email": {
+               "type": "string"
+            },
+            "password": {
+               "type": "string"
+            },
+            "verified": {
+               "type": "boolean",
+               "default": false
+            },
+            "createdAt": {
+               "type": "string",
+               "format": "date-time"
+            },
+            "updatedAt": {
+               "type": "string",
+               "format": "date-time"
+            },
+            "deletedAt": {
+               "type": "string",
+               "format": "date-time"
+            }
+         }
+      },
+      "Users": {
+         "type": "array",
+         "$ref": "#/definitions/User"
+      }
+   },
+   "tags": [
+      {
+         "name": "User",
+         "description": "API for Users"
+      }
+   ],
+   "consumes": [
+      "application/json"
+   ],
+   "produces": [
+      "application/json"
+   ]
+}
