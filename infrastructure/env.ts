@@ -9,7 +9,6 @@ function loadFromEnv(key) {
 
 export const config = {
   port: parseInt(loadFromEnv('PORT') || '9000'),
-  baseUrl: loadFromEnv('BASE_URL'),
   devMode: loadFromEnv('NODE_ENV') === 'development',
   databaseUrl: loadFromEnv('DATABASE_URL'),
   redis: {
@@ -19,7 +18,6 @@ export const config = {
   },
   jwtSecret: loadFromEnv('JWT_SECRET') || 'This is Secret',
   tokenValidationDays: parseInt(loadFromEnv('TOKEN_VALID_DAYS')!) || 200,
-  maxDurationSecond: parseInt(loadFromEnv('MAX_DURATION_SECONDS') || '180'),
   admin: {
     email: loadFromEnv('ADMIN_EMAIL'),
     password: loadFromEnv('ADMIN_PASSWORD'),
