@@ -30,7 +30,8 @@ export class UserController {
             message: 'User Signed Up Successfully',
             data: {
                user,
-               token: jwtToken(user.id),
+               refreshToken: jwtToken(user.id),
+               accessToken: jwtToken(user.id, 15), //access token valid for 15 days, after regenerate access token
             },
          })
       } catch (error: any) {
@@ -80,7 +81,7 @@ export class UserController {
       }
    }
 
-   public async login(req: any, res: any) {
+   public async login(req: Request, res: Response) {
       try {
          const { email, password } = req.body
          const payload: Partial<User> = {
@@ -111,7 +112,7 @@ export class UserController {
       }
    }
 
-   public async getLoggedInUser(req: any, res: any) {
+   public async getLoggedInUser(req: Request, res: Response) {
       try {
          const authUser: User = req.authUser
          return res.apiSuccess({

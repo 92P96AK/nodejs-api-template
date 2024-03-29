@@ -1,4 +1,4 @@
-export { VerifyUser } from './auth'
+export { VerifyUser, VerifyRefreshToken } from './auth'
 export { Validate } from './validation'
 export { jwtToken } from './jwtToken'
 export { generateRandomString } from './random'

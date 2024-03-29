@@ -17,14 +17,14 @@ export const VerifyUser = () => async (req: Request, _, next: NextFunction) => {
       const checkpayload: any = {
          id: decoded.id,
       }
-      const user = await userService.getOneUser(checkpayload)
+      const user = await userService.getOneUser(checkpayload) // remove this later , check token list and expiry
       if (!user) {
          throw {
             message: 'Invalid Token',
          }
       }
       // eslint-disable-next-line prettier/prettier
-      (<Request>req)['authUser'] = user
+      ;(<Request>req)['authUser'] = user
 
       next()
    } catch (error: any) {
@@ -34,3 +34,37 @@ export const VerifyUser = () => async (req: Request, _, next: NextFunction) => {
       })
    }
 }
+
+export const VerifyRefreshToken =
+   () => async (req: Request, _, next: NextFunction) => {
+      try {
+         const { refreshToken } = req.body
+
+         if (!refreshToken) {
+            throw {
+               message: 'Invalid Token',
+            }
+         }
+         const decoded: any = jwt.verify(refreshToken, config.jwtSecret!)
+         const userService = new UserService()
+         const checkpayload: any = {
+            id: decoded.id,
+         }
+         const user = await userService.getOneUser(checkpayload)
+         if (!user) {
+            throw {
+               message: 'Invalid Token',
+            }
+         }
+         // eslint-disable-next-line prettier/prettier
+         ;(<Request>req)['authUser'] = user
+         ;(<Request>req)['refreshToken'] = refreshToken
+
+         next()
+      } catch (error: any) {
+         next({
+            message: 'Unauthorized User',
+            error,
+         })
+      }
+   }

@@ -5,6 +5,7 @@ declare global {
    namespace Express {
       interface Request {
          authUser: User
+         refreshToken: string
          requestQuery: RequestQueryDto
       }
       interface Response {
