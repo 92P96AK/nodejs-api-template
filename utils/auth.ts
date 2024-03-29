@@ -2,6 +2,7 @@ import { NextFunction, Request } from 'express'
 import * as jwt from 'jsonwebtoken'
 import { config } from '../infrastructure/env'
 import { UserService } from '../api/services'
+import { INVALID_TOKEN, UNAUTHORIZED } from '../constants'
 
 export const VerifyUser = () => async (req: Request, _, next: NextFunction) => {
    try {
@@ -9,7 +10,7 @@ export const VerifyUser = () => async (req: Request, _, next: NextFunction) => {
       token = token?.split(' ')[1]
       if (!token) {
          throw {
-            message: 'Invalid Token',
+            message: INVALID_TOKEN,
          }
       }
       const decoded: any = jwt.verify(token, config.jwtSecret!)
@@ -20,7 +21,7 @@ export const VerifyUser = () => async (req: Request, _, next: NextFunction) => {
       const user = await userService.getOneUser(checkpayload) // remove this later , check token list and expiry
       if (!user) {
          throw {
-            message: 'Invalid Token',
+            message: INVALID_TOKEN,
          }
       }
       // eslint-disable-next-line prettier/prettier
@@ -29,7 +30,7 @@ export const VerifyUser = () => async (req: Request, _, next: NextFunction) => {
       next()
    } catch (error: any) {
       next({
-         message: 'Unauthorized User',
+         message: UNAUTHORIZED,
          error,
       })
    }
@@ -42,7 +43,7 @@ export const VerifyRefreshToken =
 
          if (!refreshToken) {
             throw {
-               message: 'Invalid Token',
+               message: INVALID_TOKEN,
             }
          }
          const decoded: any = jwt.verify(refreshToken, config.jwtSecret!)
@@ -53,7 +54,7 @@ export const VerifyRefreshToken =
          const user = await userService.getOneUser(checkpayload)
          if (!user) {
             throw {
-               message: 'Invalid Token',
+               message: INVALID_TOKEN,
             }
          }
          // eslint-disable-next-line prettier/prettier
@@ -63,7 +64,7 @@ export const VerifyRefreshToken =
          next()
       } catch (error: any) {
          next({
-            message: 'Unauthorized User',
+            message: UNAUTHORIZED,
             error,
          })
       }

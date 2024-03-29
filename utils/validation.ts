@@ -1,4 +1,5 @@
 import { NextFunction } from 'express'
+import { VALIDATION_FAILED } from '../constants'
 
 export const Validate = schema => async (req: any, _, next: NextFunction) => {
    try {
@@ -10,7 +11,7 @@ export const Validate = schema => async (req: any, _, next: NextFunction) => {
       return next()
    } catch (error: any) {
       return next({
-         message: error.message || 'Validation Failed',
+         message: error.message || VALIDATION_FAILED,
          error,
       })
    }

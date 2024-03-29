@@ -1,8 +1,9 @@
 import { NextFunction, Response } from 'express'
+import { FAILED, SUCCESS } from '../../constants'
 
 export const apiMethods = (_, res: Response, next: NextFunction) => {
    res.apiSuccess = ({
-      message = 'Success',
+      message = SUCCESS,
       data,
       status = {
          code: 200,
@@ -12,7 +13,7 @@ export const apiMethods = (_, res: Response, next: NextFunction) => {
       res.status(status.code || 200).json({ message, status, data })
    }
    res.apiFail = ({
-      message = 'Error Occured',
+      message = FAILED,
       error,
       status = {
          code: 400,

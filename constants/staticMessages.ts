@@ -1,0 +1,12 @@
+export const ACCESS_TOKEN_FETCHED_SUCCESSFULLY =
+   'Access token fetched successfully'
+export const FAILED_TO_GET_ACCESS_TOKEN = 'Failed to get access token'
+export const EMAIL_OR_USERNAME_EXIST = 'Email or username already exists'
+export const SIGN_UP_SUCCESSFULLY = 'Signed Up SUccessfully'
+export const FAILED_TO_CREATE_ACCOUNT = 'Failed to create account'
+export const SUCCESS = 'Success'
+export const FAILED = 'Failed'
+export const INVALID_CREDENTIALS = 'Invalid Credentials'
+export const INVALID_TOKEN = 'Invalid Token'
+export const UNAUTHORIZED = 'Unauthorized'
+export const VALIDATION_FAILED = 'Validation Failed'
