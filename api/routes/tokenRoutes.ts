@@ -4,7 +4,7 @@ import { VerifyRefreshToken } from '../../utils'
 
 export class TokenRoutes {
    public tokenRoutes: Router
-   public tokenCOntroller: TokenController
+   public tokenController: TokenController
 
    constructor() {
       this.tokenRoutes = Router({ mergeParams: true })
@@ -15,7 +15,7 @@ export class TokenRoutes {
       this.tokenRoutes.get(
          '/access',
          VerifyRefreshToken(),
-         this.tokenCOntroller.getAccessToken.bind(this.tokenCOntroller),
+         this.tokenController.getAccessToken.bind(this.tokenController),
       )
    }
 }
