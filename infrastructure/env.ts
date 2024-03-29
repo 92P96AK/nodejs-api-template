@@ -22,4 +22,5 @@ export const config = {
       email: loadFromEnv('ADMIN_EMAIL'),
       password: loadFromEnv('ADMIN_PASSWORD'),
    },
+   slackWebHookUrl: loadFromEnv('SLACK_WEBHOOK_URL') || '',
 }

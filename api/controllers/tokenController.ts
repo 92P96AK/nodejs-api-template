@@ -5,6 +5,7 @@ import {
    ACCESS_TOKEN_FETCHED_SUCCESSFULLY,
    FAILED_TO_GET_ACCESS_TOKEN,
 } from '../../constants'
+import { Log } from '../../helper'
 
 export class TokenController {
    constructor() {
@@ -20,7 +21,13 @@ export class TokenController {
                accessToken: jwtToken(authUser.id, 15),
             },
          })
+         Log.info({
+            message: ACCESS_TOKEN_FETCHED_SUCCESSFULLY,
+         })
       } catch (error) {
+         Log.error({
+            message: ACCESS_TOKEN_FETCHED_SUCCESSFULLY,
+         })
          res.apiFail({
             message: FAILED_TO_GET_ACCESS_TOKEN,
             error,
