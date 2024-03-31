@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client'
-import { prismaConfig } from '../../constants'
+import { prismaConfig } from '../../../constants'
 
 class BaseRepository {
    public prisma: PrismaClient

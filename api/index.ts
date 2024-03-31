@@ -7,7 +7,7 @@ import morgan from 'morgan'
 import { apiMethods } from './middlewares/apiMethod'
 import { requestQueryTransformer } from './middlewares/apiUtils'
 import { ServerEnv } from '../interfaces'
-import { Routes } from './routes'
+import { Routes } from './v1/routes'
 import * as swaggerUi from 'swagger-ui-express'
 import * as fs from 'fs'
 import * as path from 'path'
@@ -16,7 +16,7 @@ import { redisClient } from '../utils'
 
 export class Server {
    private app: Application
-   private routes: Routes
+   private v1_routes: Routes
    private env: ServerEnv
    private swaggerFile: string = path.resolve(
       __dirname + '/../swagger/swagger.json',
@@ -26,7 +26,7 @@ export class Server {
 
    constructor() {
       this.app = express()
-      this.routes = new Routes()
+      this.v1_routes = new Routes()
       this.loadEnv()
       this.use()
       this.configuration()
@@ -51,7 +51,7 @@ export class Server {
          '/api/v1/',
          requestQueryTransformer,
          apiMethods,
-         this.routes.router,
+         this.v1_routes.router,
       )
       this.app.get('/ping', (_, res: Response) => {
          res.status(200).send('Oops ! Server is Creashed')

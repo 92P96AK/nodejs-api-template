@@ -2,7 +2,7 @@ import { UserService } from '../services'
 import bcrypt from 'bcryptjs'
 import { User } from '@prisma/client'
 import { Request, Response } from 'express'
-import { jwtToken } from '../../utils'
+import { jwtToken } from '../../../utils'
 import {
    EMAIL_OR_USERNAME_EXIST,
    FAILED,
@@ -10,7 +10,7 @@ import {
    INVALID_CREDENTIALS,
    SIGN_UP_SUCCESSFULLY,
    SUCCESS,
-} from '../../constants'
+} from '../../../constants'
 export class UserController {
    private userService: UserService
 

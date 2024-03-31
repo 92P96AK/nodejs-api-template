@@ -1,11 +1,11 @@
 import { User } from '@prisma/client'
 import { Request, Response } from 'express'
-import { jwtToken } from '../../utils'
+import { jwtToken } from '../../../utils'
 import {
    ACCESS_TOKEN_FETCHED_SUCCESSFULLY,
    FAILED_TO_GET_ACCESS_TOKEN,
-} from '../../constants'
-import { Log } from '../../helper'
+} from '../../../constants'
+import { Log } from '../../../helper'
 
 export class TokenController {
    constructor() {

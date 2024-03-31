@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { UserController } from '../controllers'
-import { VerifyUser, Validate } from '../../utils'
+import { VerifyUser, Validate } from '../../../utils'
 import { newUser, login } from '../validation'
 
 export class UserRoutes {

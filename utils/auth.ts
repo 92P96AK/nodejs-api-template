@@ -1,7 +1,7 @@
 import { NextFunction, Request } from 'express'
 import * as jwt from 'jsonwebtoken'
 import { config } from '../infrastructure/env'
-import { UserService } from '../api/services'
+import { UserService } from '../api/v1/services'
 import { INVALID_TOKEN, UNAUTHORIZED } from '../constants'
 
 export const VerifyUser = () => async (req: Request, _, next: NextFunction) => {

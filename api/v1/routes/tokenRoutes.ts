@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { TokenController } from '../controllers'
-import { VerifyRefreshToken } from '../../utils'
+import { VerifyRefreshToken } from '../../../utils'
 
 export class TokenRoutes {
    public useRoutes: Router
