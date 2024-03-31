@@ -3,16 +3,16 @@ import { TokenController } from '../controllers'
 import { VerifyRefreshToken } from '../../utils'
 
 export class TokenRoutes {
-   public tokenRoutes: Router
+   public useRoutes: Router
    public tokenController: TokenController
 
    constructor() {
-      this.tokenRoutes = Router({ mergeParams: true })
+      this.useRoutes = Router({ mergeParams: true })
       this.setRoutes()
    }
 
    public setRoutes() {
-      this.tokenRoutes.get(
+      this.useRoutes.get(
          '/access',
          VerifyRefreshToken(),
          this.tokenController.getAccessToken.bind(this.tokenController),
