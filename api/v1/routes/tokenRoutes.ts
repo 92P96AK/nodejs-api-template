@@ -7,6 +7,7 @@ export class TokenRoutes {
    public tokenController: TokenController
 
    constructor() {
+      this.tokenController = new TokenController()
       this.useRoutes = Router({ mergeParams: true })
       this.setRoutes()
    }
