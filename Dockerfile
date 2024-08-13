@@ -1,4 +1,4 @@
-FROM 687241911692.dkr.ecr.us-west-2.amazonaws.com/node:14
+FROM node:14
 
 ARG version
 ENV IMG_VERSION=$version
